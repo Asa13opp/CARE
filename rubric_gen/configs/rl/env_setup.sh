@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+export LOCAL_CACHE=/tmp/${USER:-rl}/vllm_cache
+mkdir -p "$LOCAL_CACHE"
+
+export CUDA_HOME=/usr/local/cuda-12.9
+export CUDA_PATH=$CUDA_HOME
+export CUDACXX=$CUDA_HOME/bin/nvcc
+export PATH=$CUDA_HOME/bin:$PATH
+export CPATH=$CUDA_HOME/targets/x86_64-linux/include:$CUDA_HOME/include:${CPATH:-}
+export C_INCLUDE_PATH=$CUDA_HOME/targets/x86_64-linux/include:$CUDA_HOME/include:${C_INCLUDE_PATH:-}
+export CPLUS_INCLUDE_PATH=$CUDA_HOME/targets/x86_64-linux/include:$CUDA_HOME/include:${CPLUS_INCLUDE_PATH:-}
+export LIBRARY_PATH=$CUDA_HOME/targets/x86_64-linux/lib:$CUDA_HOME/lib64:${LIBRARY_PATH:-}
+export LD_LIBRARY_PATH=$CUDA_HOME/targets/x86_64-linux/lib:$CUDA_HOME/lib64:${LD_LIBRARY_PATH:-}
+
+export XDG_CONFIG_HOME="$LOCAL_CACHE/xdg_config"
+export XDG_CACHE_HOME="$LOCAL_CACHE/xdg"
+export VLLM_CACHE_ROOT="$LOCAL_CACHE/vllm"
+export TORCHINDUCTOR_CACHE_DIR="$LOCAL_CACHE/torchinductor"
+export TRITON_CACHE_DIR="$LOCAL_CACHE/triton"
+export TMPDIR="$LOCAL_CACHE/tmp"
+export FLASHINFER_WORKSPACE_BASE="$LOCAL_CACHE/flashinfer_workspace"
+export HF_DATASETS_CACHE="$LOCAL_CACHE/hf_datasets"
+
+export VLLM_NO_USAGE_STATS=1
+export VLLM_DO_NOT_TRACK=1
+export VLLM_BLOCKSCALE_FP8_GEMM_FLASHINFER=0
+export VLLM_USE_FLASHINFER_SAMPLER=0
+
+mkdir -p "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$VLLM_CACHE_ROOT" \
+  "$TORCHINDUCTOR_CACHE_DIR" "$TRITON_CACHE_DIR" "$TMPDIR" \
+  "$FLASHINFER_WORKSPACE_BASE" "$HF_DATASETS_CACHE"
+
+rm -rf "$FLASHINFER_WORKSPACE_BASE"
+mkdir -p "$FLASHINFER_WORKSPACE_BASE"
