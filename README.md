@@ -10,8 +10,6 @@
 
 <p align="center">Turn-adaptive reward specifications for empathetic reinforcement learning.</p>
 
-<p align="center"><a href="docs/">Project page source</a> · <a href="docs/README.md">GitHub Pages deployment</a></p>
-
 CARE generates a rubric for each dialogue turn, adapting the weights and criteria for **cognitive, affective, and proactive empathy**. The rubric generator is trained with supervised fine-tuning and preference-based GRPO, then used to reward policy responses during online GRPO.
 
 ## Pipeline
